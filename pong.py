@@ -1,4 +1,3 @@
-# this is my first python program
 # game of Pong
 
 # import
@@ -38,8 +37,19 @@ ball.shape("circle")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 0.1
-ball.dy = 0.1
+ball.dx = 0.3
+ball.dy = 0.3
+
+# scoreboard
+score1 = 0
+score2 = 0
+score = turtle.Turtle()
+score.speed(0)
+score.color("white")
+score.penup()
+score.hideturtle()
+score.goto(0, 260)
+score.write(f"Player 1: {score1} Player 2: {score2}", align = "center", font=("Courier", 24, "normal"))
 
 # game functions
 
@@ -86,3 +96,36 @@ while True:
     ball.sety(ball.ycor() + ball.dy)
 
     # broder chekcing
+    if ball.ycor() > 290:
+        ball.sety(290)
+        ball.dy *= -1
+
+    if ball.ycor() < -290:
+        ball.sety(-290)
+        ball.dy *= -1
+
+    if ball.xcor() > 380:
+        ball.goto(0, 0)
+        ball.dx *= -1
+        score1 += 1
+        score.clear()
+        score.write(f"Player 1: {score1} Player 2: {score2}", align = "center", font=("Courier", 24, "normal"))
+
+    if ball.xcor() < -380:
+        ball.goto(0, 0)
+        ball.dx *= -1
+        score2 += 1
+        score.clear()
+        score.write(f"Player 1: {score1} Player 2: {score2}", align = "center", font=("Courier", 24, "normal"))
+
+
+    # paddle intersection check
+    # player 1 (leftside)
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() > player1.ycor() - 40 and ball.ycor() < player1.ycor() + 40):
+        ball.setx(-340)
+        ball.dx *= -1
+    
+    # player 2 (rightside)
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() > player2.ycor() - 40 and ball.ycor() < player2.ycor() + 40):
+        ball.setx(340)
+        ball.dx *= -1
