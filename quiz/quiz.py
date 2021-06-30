@@ -1,11 +1,18 @@
-# this a quiz game
-
-# import question class
 from Question import Question
 
 # list of question
+question_prompts = [
+    "What does CPU stand for? ",
+    "What does GPU stand for? ",
+    "What does RAM stand for? ",
+    "What does PSU stand for? ",
+]
+
 questions = [
-    "What does CPU stand for?"
+    Question(question_prompts[0], "central processing unit"),
+    Question(question_prompts[1], "graphics processing unit"),
+    Question(question_prompts[2], "random access memory"),
+    Question(question_prompts[3], "power supply unit"),
 ]
 
 
@@ -16,10 +23,20 @@ if play.lower() != "yes":
 
 print("Oki let's play :)")
 
-for question in questions:
+
+def play_game(questions):
+    score = 0
+
+    for question in questions:
+        answer = input(question.prompt)
+
+        if answer.lower() == question.answer:
+            score += 1
+            print("correct!")
+        else:
+            print("incorrect!")
+
+    print("You got " + str(score) + "/" + str(len(questions)) + " correct!")
 
 
-if answer == "central processing unit":
-    print("correct!")
-else:
-    print("incorrect!")
+play_game(questions)
