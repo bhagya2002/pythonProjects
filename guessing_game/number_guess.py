@@ -7,7 +7,7 @@ top_of_range = input("Type a number: ")
 # data validation
 if top_of_range.isdigit():
     top_of_range = int(top_of_range)
-    
+
     if top_of_range <= 0:
         print("Please enter a number greater than 0 next time!")
         quit()
